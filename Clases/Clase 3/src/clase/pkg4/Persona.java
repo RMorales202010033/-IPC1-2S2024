@@ -1,18 +1,46 @@
-package ejemplo.clase.pkg4;
+package clase.pkg4;
 
+/**
+ *
+ * @author Rodolfo Morales - 202010033
+ */
 public class Persona {
+
     private String nombre;
-    private char sexo;
+    private char genero;
     private double altura;
     private long CUI;
     private int edad;
 
-    public Persona(String nombre, char sexo, double altura, long CUI, int edad) {
+    public Persona() {
+    }
+
+    public Persona(String nombre, char genero, double altura, long CUI, int edad) {
         this.nombre = nombre;
-        this.sexo = sexo;
+        this.genero = genero;
         this.altura = altura;
         this.CUI = CUI;
         this.edad = edad;
+    }
+
+    public Persona(String nombre, char genero, double altura, int edad) {
+        this.nombre = nombre;
+        this.genero = genero;
+        this.altura = altura;
+        this.edad = edad;
+        this.CUI = 1000;
+    }
+
+    public void hablar(String mensaje) {
+        System.out.println("Yo estoy hablando lo siguiente: " + mensaje);
+    }
+
+    public void MostrarDatos() {
+        System.out.println("Nombre: " + this.getNombre());
+        System.out.println("Edad: " + this.getEdad());
+        System.out.println("Genero: " + this.getGenero());
+        System.out.println("Altura: " + this.getAltura());
+        System.out.println("CUI: " + this.getCUI());
     }
 
     /**
@@ -30,17 +58,17 @@ public class Persona {
     }
 
     /**
-     * @return the sexo
+     * @return the genero
      */
-    public char getSexo() {
-        return sexo;
+    public char getGenero() {
+        return genero;
     }
 
     /**
-     * @param sexo the sexo to set
+     * @param genero the genero to set
      */
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
+    public void setGenero(char genero) {
+        this.genero = genero;
     }
 
     /**
@@ -84,18 +112,5 @@ public class Persona {
     public void setEdad(int edad) {
         this.edad = edad;
     }
-    
-    public void hablar(String mensaje){
-        System.out.println("Yo estoy diciendo: " + mensaje);
-    }
-    
-    public void MostrarDatos(){
-        System.out.println("Nombre: " + this.getNombre());
-        System.out.println("Edad: " + this.getEdad());
-        System.out.println("Sexo: " + this.getSexo());
-        System.out.println("Altura: " + this.getAltura());
-        System.out.println("CUI: " + this.getCUI());
-    }
-    
-    
+
 }

@@ -1,8 +1,8 @@
-package ejemplo.clase.pkg4;
+package clase.pkg4;
 
 /**
  *
- * @author jrodo
+ * @author Rodolfo Morales - 202010033
  */
 public class Estudiante extends Persona {
 
@@ -11,8 +11,8 @@ public class Estudiante extends Persona {
     private String[] cursos;
     private int contador;
 
-    public Estudiante(String nombre, char sexo, double altura, long CUI, int edad, int carnet, String carrera) {
-        super(nombre, sexo, altura, CUI, edad);
+    public Estudiante(String nombre, char genero, double altura, long CUI, int edad, int carnet, String carrera) {
+        super(nombre, genero, altura, CUI, edad);
         this.carnet = carnet;
         this.carrera = carrera;
         this.cursos = new String[5];
