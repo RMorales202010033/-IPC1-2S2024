@@ -1,5 +1,6 @@
-package clase5;
+package clase.pkg4;
 
+// Librerias
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,7 +9,7 @@ import java.awt.event.ActionListener;
 
 /**
  *
- * @author jrodo
+ * @author Rodolfo Morales - 202010033
  */
 public class CREATE_STUDENT extends JFrame implements ActionListener {
 
@@ -79,8 +80,8 @@ public class CREATE_STUDENT extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Registrarse")) {
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getActionCommand().equals("Registrarse")) {
             String firstName = firstNameField.getText();
             String lastName = lastNameField.getText();
             String email = emailField.getText();
@@ -90,11 +91,14 @@ public class CREATE_STUDENT extends JFrame implements ActionListener {
             System.out.println("Apellido: " + lastName);
             System.out.println("Correo: " + email);
             System.out.println("Género: " + selectedGender);
-            
-            String studentCode = Integer.toString(Clase5.code);
-            String[] dataStudent = {studentCode,firstName, lastName, email, selectedGender};
-            Clase5.addStudent(dataStudent);
-            Clase5.code += 1;
+
+            String studentCode = Integer.toString(Clase4.code);
+            String[] dataStudent = {studentCode, firstName, lastName, email, selectedGender};
+            Clase4.addStudent(dataStudent);
+            EstudianteObjeto studentObject = new EstudianteObjeto(Clase4.code, firstName, lastName, email, selectedGender);
+            System.out.println(studentObject.toString());
+            Clase4.addStudentObject(studentObject);
+            Clase4.code += 1;
             ESTUDIANTE student = new ESTUDIANTE();
             this.dispose();
         }

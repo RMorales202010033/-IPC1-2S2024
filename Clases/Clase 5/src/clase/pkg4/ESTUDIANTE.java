@@ -1,4 +1,4 @@
-package clase5;
+package clase.pkg4;
 
 // Libraries
 import java.awt.Color;
@@ -22,7 +22,7 @@ import javax.swing.table.TableColumnModel;
 
 /**
  *
- * @author jrodo
+ * @author Rodolfo Morales - 202010033
  */
 public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener {
 
@@ -41,6 +41,10 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
     boolean vb1 = true;
 
     public ESTUDIANTE() {
+        initComponents();
+    }
+
+    private void initComponents() {
         panel = new JTabbedPane(JTabbedPane.TOP);
         jp1 = new JPanel(null);
         panel.addTab("Students", jp1);
@@ -81,7 +85,7 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         jp1.add(lbl4);
         //TABLE		
         String[] titulos_c = {"Código", "Nombre", "Apellido", "Correo", "Género"};
-        tabla_oficial = new JTable(Clase5.convertirDatos_students(), titulos_c);
+        tabla_oficial = new JTable(Clase4.convertirDatos_students(), titulos_c);
         DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
         Alinear.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < titulos_c.length; i++) {
