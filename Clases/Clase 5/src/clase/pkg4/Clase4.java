@@ -7,19 +7,24 @@ package clase.pkg4;
 // Libraries
 import java.awt.Color;
 import java.awt.Font;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.ColorUIResource;
 
 public class Clase4 {
@@ -34,11 +39,11 @@ public class Clase4 {
     static ArrayList<String[]> students = new ArrayList<>();
     static ArrayList<EstudianteObjeto> studentsObjects = new ArrayList<>();
 
-    static String[][] example_students = {
-        {"202010033", "Rodolfo", "Morales", "jrodolfomc2002@gmail.com", "Masculino"},
-        {"202010034", "Luisa", "Castillo", "luisac@gmail.com", "Femenino"},
-        {"202010025", "Ayeser", "Juarez", "ayez@gmail.com", "Masculino"},
-        {"202011535", "Esteban", "Ennati", "enox@gmail.com", "Masculino"},};
+//    static String[][] example_students = {
+//        {"202010033", "Rodolfo", "Morales", "jrodolfomc2002@gmail.com", "Masculino"},
+//        {"202010034", "Luisa", "Castillo", "luisac@gmail.com", "Femenino"},
+//        {"202010025", "Ayeser", "Juarez", "ayez@gmail.com", "Masculino"},
+//        {"202011535", "Esteban", "Ennati", "enox@gmail.com", "Masculino"},};
     static int code = 202300000;
 
     public static void main(String[] args) {
@@ -49,9 +54,9 @@ public class Clase4 {
             Logger.getLogger(LOGIN.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        for (String[] student : example_students) {
-            students.add(student);
-        }
+//        for (String[] student : example_students) {
+//            students.add(student);
+//        }
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         studentsObjects = (ArrayList<EstudianteObjeto>) DeserializarEstudiantes();
 
@@ -139,5 +144,60 @@ public class Clase4 {
         student[4] = eo.getGenero();
         // Agregamos el vector string con la data del estudiante a la lista
         students.add(student);
+    }
+
+    public static void lecturaCSV(JFrame frame) {
+
+        JFileChooser fileChooser = new JFileChooser();
+
+        //Filtro para que unicamente deje seleccionar archivos CSV 
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos CSV", "csv");
+        fileChooser.setFileFilter(filter);
+
+        // Mostrar el diálogo de selección de archivos
+        int result = fileChooser.showOpenDialog(frame);
+
+        // Verificar si se seleccionó un archivo
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // Obtener el archivo seleccionado
+            File selectedFile = fileChooser.getSelectedFile();
+            System.out.println("=======================================================================");
+            System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
+
+            // Leer el archivo CSV y mostrar su contenido como tabla
+            try {
+                Scanner scanner = new Scanner(selectedFile);
+                boolean v1 = true;
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine(); // "Carnet, Nombre, Apellido, Correo, Genero"
+                    String[] parts = line.split(","); // ["Carnet", " Nombre", " Apellido", " Correo", " Genero"]
+
+                    for (int i = 0; i < parts.length; i++) {
+                        parts[i] = parts[i].trim();
+                    }
+
+                    for (String part : parts) {
+                        System.out.print(part + "\t | \t");
+                    }
+                    System.out.println();
+                    
+                    if (v1) {
+                        v1 = !v1;
+                    } else{
+                        EstudianteObjeto student = new EstudianteObjeto(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4]);
+                        addStudentObject(student);
+                        ConvertirStudentToString(student);
+                    }
+                }
+                scanner.close();
+                frame.dispose();
+                ESTUDIANTE student = new ESTUDIANTE();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+            System.out.println("=======================================================================");
+            System.out.println("");
+        }
+
     }
 }

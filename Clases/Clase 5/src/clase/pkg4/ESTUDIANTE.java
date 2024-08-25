@@ -68,6 +68,14 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         btn1.addActionListener(this);
         jp1.add(btn1);
 
+        //BTN2	
+        btn2 = new JButton("Cargar Estudiantes");
+        btn2.setBounds(800, 100, 257, 50);
+        btn2.setVisible(true);
+        btn2.setEnabled(true);
+        btn2.addActionListener(this);
+        jp1.add(btn2);
+
         //LBL4
         lbl4 = new JLabel("Listado Oficial Estudiantes");
         lbl4.setBounds(25, 25, 750, 50);
@@ -143,6 +151,8 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         if (ae.getSource() == btn1) {
             CREATE_STUDENT create_student = new CREATE_STUDENT();
             this.dispose();
+        } else if(ae.getSource() == btn2){
+            Clase4.lecturaCSV(this);
         }
     }
 
