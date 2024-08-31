@@ -1,5 +1,9 @@
-package clase5;
+package clase.pkg4;
 
+/**
+ *
+ * @author Rodolfo Morales - 202010033
+ */
 //Libraries
 import javax.swing.*;
 import java.awt.*;
@@ -8,10 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-/**
- *
- * @author jrodo
- */
 public class LOGIN extends JFrame implements ActionListener, FocusListener {
 
     private JTextField usernameField;
@@ -25,7 +25,7 @@ public class LOGIN extends JFrame implements ActionListener, FocusListener {
     }
 
     private void initComponents() {
-        JLabel titleLabel = new JLabel("Welcome");
+        JLabel titleLabel = new JLabel("Welcome!");
         titleLabel.setFont(new Font("Kristen ITC", Font.BOLD, 20)); // Establece el tipo de letra y el tamaño
         titleLabel.setBounds(200, 10, 100, 30); //pos x, pos y, ancho, alto
         this.add(titleLabel);
@@ -94,7 +94,7 @@ public class LOGIN extends JFrame implements ActionListener, FocusListener {
         this.setLocationRelativeTo(null);
 //        this.setBounds(0, 0, 500, 350); // Posición y tamaño de la ventana (x, y, width, height)
         this.setSize(500, 350);
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         /*
         x: La posición horizontal de la esquina superior izquierda de la ventana en píxeles desde el borde izquierdo de la pantalla.
         y: La posición vertical de la esquina superior izquierda de la ventana en píxeles desde la parte superior de la pantalla.
@@ -123,7 +123,7 @@ public class LOGIN extends JFrame implements ActionListener, FocusListener {
 
             System.out.println("Usuario: " + username);
             System.out.println("Password: " + pwd);
-            
+
             if (username.equals("admin") && pwd.equals("admin")) {
                 ESTUDIANTE student = new ESTUDIANTE();
                 System.out.println("Welcome admin");
@@ -143,8 +143,8 @@ public class LOGIN extends JFrame implements ActionListener, FocusListener {
             usernameField.setText("");
         } else if (fe.getSource() == passwordField) {
             if (cb1.isSelected()) {
-                passwordField.setEchoChar((char)0);
-            }else{
+                passwordField.setEchoChar((char) 0);
+            } else {
                 passwordField.setEchoChar('\u25CF');
             }
             passwordField.setText("");
@@ -152,7 +152,7 @@ public class LOGIN extends JFrame implements ActionListener, FocusListener {
     }
 
     @Override
-    public void focusLost(FocusEvent e) {
+    public void focusLost(FocusEvent fe) {
 
     }
 

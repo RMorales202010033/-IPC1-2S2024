@@ -1,9 +1,8 @@
-package clase5;
+package clase.pkg4;
 
 // Libraries
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -20,6 +19,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+
+// Librerías para el uso de gráficos
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -31,7 +32,7 @@ import org.jfree.util.Rotation;
 
 /**
  *
- * @author jrodo
+ * @author Rodolfo Morales - 202010033
  */
 public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener {
 
@@ -39,22 +40,28 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
     JLabel lbl1, lbl2, lbl3, lbl4, lbl5, lbl6;
     // JButton hace referencia a los botones
     JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12;
-    //JTabbedPane       
+    //JTabbedPane	
     JTabbedPane panel;
     //JPanels
     JPanel jp1, jp2, jp3, jp4;
     //Atributos para la tabla
     JTable tabla_oficial;
-    JScrollPane sp1, sp2;
+    JScrollPane sp1;
+
+    boolean vb1 = true;
 
     public ESTUDIANTE() {
+        initComponents();
+    }
+
+    private void initComponents() {
         panel = new JTabbedPane(JTabbedPane.TOP);
         jp1 = new JPanel(null);
         panel.addTab("Students", jp1);
         jp2 = new JPanel();
         jp2.setBackground(Color.yellow);
         jp2.setLayout(null);
-        panel.addTab("Materias", jp2);
+        panel.addTab("Tab 2", jp2);
         jp3 = new JPanel();
         jp3.setBackground(Color.yellow);
         jp3.setLayout(null);
@@ -62,14 +69,30 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         jp4 = new JPanel();
         panel.addTab("Logout", jp4);
         panel.addChangeListener(this);
-///////////////////////////////////////////// STUDENTS //////////////////////////////////////////////////////////////////////////////////////////               
-        //BTN1  
+///////////////////////////////////////////// STUDENTS //////////////////////////////////////////////////////////////////////////////////////////		
+        //BTN1	
         btn1 = new JButton("Crear");
         btn1.setBounds(800, 25, 257, 50);
         btn1.setVisible(true);
         btn1.setEnabled(true);
         btn1.addActionListener(this);
         jp1.add(btn1);
+
+        //BTN2	
+        btn2 = new JButton("Cargar Estudiantes");
+        btn2.setBounds(800, 100, 257, 50);
+        btn2.setVisible(true);
+        btn2.setEnabled(true);
+        btn2.addActionListener(this);
+        jp1.add(btn2);
+
+        //BTN3
+        btn3 = new JButton("Generar HTML");
+        btn3.setBounds(800, 175, 257, 50);
+        btn3.setVisible(true);
+        btn3.setEnabled(true);
+        btn3.addActionListener(this);
+        jp1.add(btn3);
 
         // Gráficas
         // Estilos de graficas: http://www.java2s.com/Code/Java/Chart/CatalogChart.htm
@@ -82,10 +105,10 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         datos.setValue(50, "IPC 2", "Alumno 5");
         datos.setValue(65, "IPC 2", "Alumno 6");
 
-        // Instancear gráfica de barras 3D
+        // Instancear gráfico de barras 3D
         JFreeChart grafico_barras = ChartFactory.createBarChart3D(
-            "Calificaciones alumnos IPC1", // Nombre del grafico
-            "Estudiantes de IPC1", // Nombre de las barras o columnas
+            "Calificaciones alumnos IPC1 e IPC2", // Título del grafico
+            "Estudiantes", // Nombre de las barras o columnas
             "Calificacion", // Nombre de la numeracion
             datos, // Datos del grafico
             PlotOrientation.VERTICAL, // Orientacion
@@ -96,10 +119,10 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
 
         // Creación de un ChartPanel el cual almacenará nuestro gráfico
         ChartPanel cPanel = new ChartPanel(grafico_barras);
-        // Habilitamos es scroll
+        // Habilitamos el scroll
         cPanel.setMouseWheelEnabled(true);
         // Asignamos la posición y las dimensiones de nuestro ChartPanel
-        cPanel.setBounds(800, 100, 450, 300);
+        cPanel.setBounds(800, 250, 450, 300);
         // Agregamos a nuestra pestaña el ChartPanel con nuestro gráfico
         jp1.add(cPanel);
 
@@ -131,7 +154,7 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         // Habilitamos es scroll
         cPanel2.setMouseWheelEnabled(true);
         // Asignamos la posición y las dimensiones de nuestro ChartPanel
-        cPanel2.setBounds(800, 425, 450, 300);
+        cPanel2.setBounds(800, 575, 450, 300);
         // Agregamos a nuestra pestaña el ChartPanel con nuestro gráfico
         jp1.add(cPanel2);
 
@@ -150,9 +173,9 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         lbl4.setFont(font.deriveFont(attributes));
         lbl4.setVisible(true);
         jp1.add(lbl4);
-        //TABLE         
+        //TABLE		
         String[] titulos_c = {"Código", "Nombre", "Apellido", "Correo", "Género"};
-        tabla_oficial = new JTable(Clase5.convertirDatos_students(), titulos_c);
+        tabla_oficial = new JTable(Clase4.convertirDatos_students(), titulos_c);
         DefaultTableCellRenderer Alinear = new DefaultTableCellRenderer();
         Alinear.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < titulos_c.length; i++) {
@@ -166,7 +189,7 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         jp1.add(sp1);
         //LBL1
         lbl1 = new JLabel();
-        lbl1.setBounds(0, 0, 1364, 1280);
+        lbl1.setBounds(0, 0, 1364, 675);
         ImageIcon iprofesores = new ImageIcon(getClass().getResource("./Images/profesor.jpg"));
         Image imgEscalada = iprofesores.getImage().getScaledInstance(lbl1.getWidth(), lbl1.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imgEscalada);
@@ -174,58 +197,10 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         lbl1.setVisible(true);
         jp1.add(lbl1);
 
-/////////////////////////////////////////////////// Materias //////////////////////////////////////////////////////////////////////////////////////////             
-        // LBL5 
-        lbl5 = new JLabel("Materias");
-        lbl5.setBounds(25, 25, 1230, 50);
-        lbl5.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-        this.lbl5.setBackground(Color.LIGHT_GRAY);
-        this.lbl5.setOpaque(true);
-        lbl5.setVerticalAlignment(SwingConstants.CENTER);
-        lbl5.setHorizontalAlignment(SwingConstants.CENTER);
-        lbl5.setFont(new Font(lbl4.getFont().getFontName(), Font.BOLD, 24));
-        Font font1 = lbl5.getFont();
-        Map attributes1 = font1.getAttributes();
-        attributes1.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
-        lbl5.setFont(font.deriveFont(attributes));
-        lbl5.setVisible(true);
-        jp2.add(lbl5);
-
-        // Paneles de materias de manera dinamica
-        JPanel jpScroll = new JPanel();
-        jpScroll.setLayout(null);
-        int x = 0, y = 0;
-        int scrollHeight = ((Clase5.materias.size() / 2) + 1) * 430;
-        boolean v1 = true;
-
-        for (int i = 0; i < Clase5.materias.size(); i++) {
-            MATERIA materiaTemp = new MATERIA(Clase5.materias.get(i));
-            if (v1) {
-                x = 0;
-            } else {
-                x = 620;
-            }
-
-            JPanel jpTemp = materiaTemp.getPanel();
-            jpTemp.setBounds(x, y, 590, 400);
-            jpTemp.setVisible(true);
-            jpScroll.add(jpTemp);
-            if (!v1) {
-                y += 430;
-            }
-            v1 = !v1;
-        }
-
-        jpScroll.setPreferredSize(new Dimension(1230, scrollHeight));
-        sp2 = new JScrollPane(jpScroll);
-        sp2.setBounds(25, 100, 1230, 750);
-        sp2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        sp2.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        jp2.add(sp2);
-
+/////////////////////////////////////////////////// TAB2 //////////////////////////////////////////////////////////////////////////////////////////		
         //LBL2
         lbl2 = new JLabel();
-        lbl2.setBounds(0, 0, 1364, 1280);
+        lbl2.setBounds(0, 0, 1364, 675);
         ImageIcon icursos = new ImageIcon(getClass().getResource("./Images/cursos.jpg"));
         Image imgEscalada2 = icursos.getImage().getScaledInstance(lbl2.getWidth(), lbl2.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscalado2 = new ImageIcon(imgEscalada2);
@@ -233,10 +208,10 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         lbl2.setVisible(true);
         jp2.add(lbl2);
 
-///////////////////////////////////////////// TAB3 //////////////////////////////////////////////////////////////////////////////////////////           
+///////////////////////////////////////////// TAB3 //////////////////////////////////////////////////////////////////////////////////////////		
         //LBL3
         lbl3 = new JLabel();
-        lbl3.setBounds(0, 0, 1364, 1280);
+        lbl3.setBounds(0, 0, 1364, 675);
         ImageIcon ialumnos = new ImageIcon(getClass().getResource("./Images/alumnos.jpg"));
         Image imgEscalada3 = ialumnos.getImage().getScaledInstance(lbl3.getWidth(), lbl3.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscalado3 = new ImageIcon(imgEscalada3);
@@ -258,6 +233,10 @@ public class ESTUDIANTE extends JFrame implements ActionListener, ChangeListener
         if (ae.getSource() == btn1) {
             CREATE_STUDENT create_student = new CREATE_STUDENT();
             this.dispose();
+        } else if (ae.getSource() == btn2) {
+            Clase4.lecturaCSV(this);
+        } else if (ae.getSource() == btn3) {
+            Clase4.generateHtml();
         }
     }
 
