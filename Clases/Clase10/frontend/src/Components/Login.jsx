@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import './Styles/Login.css';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 function Login() {
     // Creación de los estados de la pantalla
     const [carnet, setCarnet] = useState('');
     const [password, setPassword] = useState('');
     // Creación de la cookie que se usará
-    const [cookies, setCookie] = useCookies(['usuario']);
+    const [cookies, setCookie] = useCookies(['student']);
     // Creación del encargado de navegar entre las distintas rutas que tiene nuestro Router
     const navigate = useNavigate();
 
@@ -17,11 +18,11 @@ function Login() {
         // Evita la recarga de nuestro sitio web
         event.preventDefault();
         const data = {
-            carnet: parseInt(carnet, 10),
-            password: password
+            Carnet: carnet,
+            Password: password
         }
         // Este método se encarga de comunicarse con el backend con un endpoint específico, en este caso /login
-        fetch(`http://localhost:5000/login`, {
+        fetch(`http://localhost:5000/api/login`, {
             // Se especifica el tipo de método
             method: "POST",
             // Se parsea a json el cuerpo que se mandará
@@ -42,14 +43,32 @@ function Login() {
                     // De la respuesta que mandó el backend guardamos únicamente el valor del atributo user
                     const dataUser = res.user;
                     // Mostramos el nombre y apellido del usuario
-                    alert(`Welcome: ${dataUser.nombre} ${dataUser.apellido}`)
+                    Swal.fire({
+                        title: 'Login!',
+                        text: `Welcome: ${dataUser.Nombre} ${dataUser.Apellido}`,
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    });
                     // Guardamos en las cookies lo que mandó el backend
-                    setCookie('usuario', dataUser);
-                    // Navegamos a la siguiente ruta que está en nuestro router
-                    navigate('/admin')
+                    setCookie('student', dataUser);
+                    console.log(dataUser.role)
+                    // Validamos el rol
+                    if (dataUser.role === 0) {
+                        // Navegamos a la ruta donde se encuentra la pantalla del admin
+                        // navigate('/admin')
+                    } else if (dataUser.role === 1) {
+                        // Navegamos a la ruta donde se encuentra la pantalla del usuario
+                        // navigate('/user')
+                    }
                 } else {
                     // Si las credenciales están mal se muestra el siguiente mensaje.
-                    alert(`Email and/or password incorrect.`)
+                    // alert(`Carnet and/or password incorrect.`)
+                    Swal.fire({
+                        title: 'Error!',
+                        text: `Carnet and/or password incorrect.`,
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
                 }
                 // Se limpian los estados
                 setCarnet("")
