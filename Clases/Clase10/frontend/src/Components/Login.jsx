@@ -51,14 +51,14 @@ function Login() {
                     });
                     // Guardamos en las cookies lo que mandó el backend
                     setCookie('student', dataUser);
-                    console.log(dataUser.role)
+                    console.log(dataUser.Role)
                     // Validamos el rol
-                    if (dataUser.role === 0) {
+                    if (dataUser.Role === 0) {
                         // Navegamos a la ruta donde se encuentra la pantalla del admin
-                        // navigate('/admin')
-                    } else if (dataUser.role === 1) {
+                        navigate('/admin')
+                    } else if (dataUser.Role === 1) {
                         // Navegamos a la ruta donde se encuentra la pantalla del usuario
-                        // navigate('/user')
+                        navigate('/user')
                     }
                 } else {
                     // Si las credenciales están mal se muestra el siguiente mensaje.
