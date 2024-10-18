@@ -1,0 +1,42 @@
+[
+    {
+        "Carnet": "202300000",
+        "Nombre": "Admin",
+        "Apellido": " FIUSAC",
+        "Edad": 50,
+        "Password": "admin",
+        "Role": 0
+    },
+    {
+        "Carnet": "201902761",
+        "Nombre": "Fernando",
+        "Apellido": "Maraiegos",
+        "Edad": 21,
+        "Password": "1234",
+        "Role": 1
+    },
+    {
+        "Carnet": "202001376",
+        "Nombre": "Kevin",
+        "Apellido": "Sandoval",
+        "Edad": 21,
+        "Password": "1234",
+        "Role": 1
+    },
+    {
+        "Carnet": "202010033",
+        "Nombre": "Josue",
+        "Apellido": "Castillo",
+        "Edad": "21",
+        "Password": "1234",
+        "Role": 1
+    },
+    {
+        "Carnet": "202010025",
+        "Nombre": "Ayeser",
+        "Apellido": "Oxlaj",
+        "Edad": "24",
+        "Password": "1234",
+        "Role": 1
+    }
+]
